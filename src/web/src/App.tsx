@@ -22,6 +22,7 @@ const App: FC = () => {
       <TodoContext.Provider value={initialContext}>
         <BrowserRouter>
           <Telemetry>
+            <div>test</div>
             <Layout />
           </Telemetry>
         </BrowserRouter>
