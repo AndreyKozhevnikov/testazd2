@@ -9,8 +9,31 @@ from starlette.requests import Request
 
 from .app import app
 from .models import (CreateUpdateTodoItem, CreateUpdateTodoList, TodoItem,
-                     TodoList, TodoState)
+                     TodoList, TodoState,TestClass,CreateUpdateTestClass)
 
+@app.post("/testclasslist", response_model=TestClass, response_model_by_alias=False, status_code=201)
+async def create_list(body: CreateUpdateTestClass, request: Request, response: Response) -> TestClass:
+    """
+    Create a new TestClass
+    """
+    test_class = await TestClass(**body.dict(), createdDate=datetime.utcnow()).save()
+    response.headers["Location"] = urljoin(str(request.base_url), "lists/{0}".format(str(test_class.id)))
+    return test_class
+
+@app.get("/testclasslist", response_model=List[TestClass], response_model_by_alias=False)
+async def get_testclass(
+    top: Optional[int] = None, skip: Optional[int] = None
+) -> List[TestClass]:
+    """
+    Get all TestClass
+
+    Optional arguments:
+
+    - **top**: Number of lists to return
+    - **skip**: Number of lists to skip
+    """
+    query = TestClass.all().skip(skip).limit(top)
+    return await query.to_list()
 
 @app.get("/lists", response_model=List[TodoList], response_model_by_alias=False)
 async def get_lists(
@@ -83,7 +106,7 @@ async def create_list_item(
     Creates a new Todo item within a list
     """
     item = TodoItem(listId=list_id, **body.dict(), createdDate=datetime.utcnow())
-    response.headers["Location"] = urljoin(str(request.base_url), "lists/{0}/items/{1}".format(str(list_id), str(item.id)))
+    response.headers["Location"] = urljoin(str(request.base_url), "lists/{0}/items/{1}".format(str(list_id), str(item.id))) 
     return await item.save()
 
 
