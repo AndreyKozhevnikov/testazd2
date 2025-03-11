@@ -49,6 +49,14 @@ class Settings(BaseSettings):
         env_file = ".env"
         env_file_encoding = "utf-8"
 
+class TestClass(Document):
+    name: str
+    testproperty: Optional[str] = None
+    
+class CreateUpdateTestClass(BaseModel):
+    name: str
+    testproperty: Optional[str] = None
+
 
 class TodoList(Document):
     name: str
@@ -87,4 +95,4 @@ class CreateUpdateTodoItem(BaseModel):
     completedDate: Optional[datetime] = None
 
 
-__beanie_models__ = [TodoList, TodoItem]
+__beanie_models__ = [TodoList, TodoItem,TestClass]
