@@ -1,3 +1,4 @@
+azd init -t todo-python-mongo
 ---
 page_type: sample
 languages:
