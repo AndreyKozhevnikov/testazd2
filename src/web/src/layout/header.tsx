@@ -63,7 +63,7 @@ const Header: FC = (): ReactElement => {
       </Stack>
       <Stack.Item grow={1}>
         <div>test3</div>
-        <button onClick={onmybuttonclicked}>mybutton</button>
+        <button onClick={onmybuttonclicked}>mybutton3</button>
       </Stack.Item>
       <Stack.Item>
         <Stack horizontal styles={toolStackClass} grow={1}>
