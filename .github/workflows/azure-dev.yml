@@ -1,3 +1,5 @@
+name: my-test-deploy
+
 on:
   workflow_dispatch:
   push:
