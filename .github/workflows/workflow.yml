@@ -8,3 +8,9 @@ jobs:
     steps:
       - name: 'placeholder step'
         run: echo "Hello world!"
+
+      - name: Debug GitHub OIDC Token
+        run: |
+          echo "GitHub OIDC token claims:"
+          curl -sSL -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+          "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://AzureADTokenExchange" | jq
