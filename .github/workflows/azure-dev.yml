@@ -1,3 +1,5 @@
+name: maindeploy
+
 on:
     workflow_dispatch:
     push:
@@ -60,7 +62,7 @@ jobs:
                   AZURE_KEY_VAULT_NAME: ${{ vars.AZURE_KEY_VAULT_NAME }}
 
             - name: Deploy Application
-              run: azd deploy web --no-prompt #deploy api fails for some reason - investigating
+              run: azd deploy --no-prompt #deploy api fails for some reason - investigating
               env:
                   AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
                   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
